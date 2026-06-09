@@ -2,6 +2,12 @@
 
 Ứng dụng máy tính được xây dựng bằng Flutter, cung cấp giao diện và trải nghiệm tương tự ứng dụng máy tính mặc định trên iOS. Ứng dụng hỗ trợ thay đổi bố cục linh hoạt theo hướng màn hình: chế độ cơ bản (dọc) và chế độ khoa học (ngang).
 
+<p align="center">
+  <img src="screenshots/portrait.png" width="300" alt="Chế độ Dọc (Portrait) - Bàn phím cơ bản">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="screenshots/landscape.png" height="300" alt="Chế độ Ngang (Landscape) - Bàn phím khoa học">
+</p>
+
 ## Tính năng chính
 
 ### Giao diện (UI/UX)
