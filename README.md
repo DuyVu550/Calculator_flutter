@@ -67,25 +67,24 @@ flutter test test/core/models/calculator_notifier_test.dart
 
 ## 📁 Cấu trúc thư mục dự án
 
-Dự án được tổ chức gọn gàng theo sự phân tách giữa lớp Giao diện (UI) và lớp Logic cốt lõi (Core), giúp mã nguồn dễ đọc, dễ mở rộng và kiểm thử độc lập. Dưới đây là cấu trúc chi tiết nằm trong thư mục `lib/`:
+Dự án được tổ chức gọn gàng theo sự phân tách giữa lớp Giao diện (UI) và lớp Logic cốt lõi (Core), giúp mã nguồn dễ đọc, dễ mở rộng và kiểm thử độc lập:
 
-### Tổng quan `lib/`
-
-- **`main.dart`**: Điểm bắt đầu (Entry point) của ứng dụng. Nơi cấu hình ProviderScope (cho Riverpod), thiết lập hướng xoay màn hình ưu tiên và khởi chạy giao diện chính.
-
-### 1. `core/` (Lớp Cốt lõi & Logic nghiệp vụ)
-Thư mục này chứa toàn bộ các quy tắc tính toán và trạng thái của ứng dụng, hoàn toàn độc lập và không phụ thuộc vào giao diện (UI).
-- **`logic/`**: Chứa các thuật toán phân tích và tính toán thuần túy.
-  - Cốt lõi là bộ đánh giá biểu thức (Expression Evaluator) triển khai thuật toán Shunting-Yard, giúp tính toán chính xác chuỗi phép tính có ưu tiên (BEDMAS/PEMDAS).
-- **`models/`**: Nơi quản lý trạng thái (State Management) của ứng dụng bằng Riverpod.
-  - Định nghĩa các đối tượng trạng thái bất biến (Immutable State) như giá trị đang hiển thị, biểu thức chờ tính, chế độ Radian/Độ.
-  - Chứa Notifier (lớp điều khiển) đảm nhiệm xử lý sự kiện khi người dùng thao tác (nhập số, xóa, gọi hàm, tính kết quả) và cập nhật trạng thái mới.
-
-### 2. `ui/` (Lớp Giao diện)
-Thư mục này chịu trách nhiệm vẽ các thành phần lên màn hình và ghi nhận các lượt tương tác của người dùng.
-- **`screens/`**: Chứa các màn hình hoàn chỉnh của ứng dụng.
-  - Nổi bật là `CalculatorScreen`, màn hình chính xử lý tính năng đáp ứng (Responsive) - tự động thay đổi bố cục giữa bàn phím cơ bản (dọc) và bàn phím khoa học (ngang) dựa trên kích thước khung hình.
-- **`theme/`**: Chứa các cấu hình về phong cách thiết kế chung.
-  - Nơi khai báo tập trung bảng màu (Colors), kiểu chữ (Typography), độ bo góc hoặc khoảng cách, đảm bảo giao diện thống nhất toàn ứng dụng.
-- **`widgets/`**: Chứa các thành phần UI nhỏ gọn và có thể tái sử dụng ở nhiều nơi.
-  - Các widget tùy chỉnh như `ButtonTile` (các nút bấm trên máy tính) với hiệu ứng chuyển động, xử lý chạm mượt mà và nhiều biến thể màu sắc khác nhau.
+```text
+lib/
+├── core/                       # ⚙️ LỚP CỐT LÕI & LOGIC NGHIỆP VỤ (Hoàn toàn độc lập với UI)
+│   ├── logic/                  # Chứa các thuật toán phân tích và tính toán thuần túy
+│   │   └── expr_evaluator.dart # Bộ đánh giá biểu thức (Shunting-Yard, BEDMAS/PEMDAS)
+│   └── models/                 # Quản lý trạng thái (State Management) bằng Riverpod
+│       ├── calculator_state.dart     # Định nghĩa các trạng thái bất biến (Immutable State)
+│       └── calculator_notifier.dart  # Lớp điều khiển (Notifier) xử lý sự kiện nhập số, tính toán
+│
+├── ui/                         # 🎨 LỚP GIAO DIỆN (Vẽ màn hình & nhận tương tác người dùng)
+│   ├── screens/                # Chứa các màn hình hoàn chỉnh
+│   │   └── calculator_screen.dart    # Màn hình chính xử lý UI Responsive (bố cục dọc/ngang)
+│   ├── theme/                  # Cấu hình phong cách thiết kế chung
+│   │   └── colors.dart, vv...        # Tập trung bảng màu, typography, khoảng cách thống nhất
+│   └── widgets/                # Các thành phần UI nhỏ gọn, tái sử dụng ở nhiều nơi
+│       └── button_tile.dart          # Nút bấm tùy chỉnh của máy tính với hiệu ứng chuyển động
+│
+└── main.dart                   # 🚀 ĐIỂM BẮT ĐẦU (Entry point), cấu hình ProviderScope và hướng xoay
+```
